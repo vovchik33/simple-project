@@ -4,7 +4,7 @@ function PostItem(props) {
   return (
     <div className="post">
       <div className="post_content">
-        <strong>{props.title}</strong>
+        <strong>{props.index}. {props.title}</strong>
         <div>
           {props.text}
         </div>

@@ -7,9 +7,9 @@ function PostList({title, posts}) {
     <div className="post-list">
       <PostHeader title={title} />
       {
-        posts.map((post) => {
+        posts.map((post, index) => {
           return (
-            <PostItem {...post}/>
+            <PostItem key={index} index={index+1} {...post}/>
           )
         })
       }
