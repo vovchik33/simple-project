@@ -1,29 +1,39 @@
-import React, {useState} from 'react';
-import PostButton from "./post-button/PostButton";
+import React, {useMemo, useState} from 'react';
+import Button from "../../ui/button/Button";
+import Input from "../../ui/input/Input";
 
-const PostEditor = () => {
+const PostEditor = ({addPostComplete}) => {
   const [post, setPost] = useState({title: 'sss', text: 'ttt'})
+  const disabled = useMemo(
+    () => !post.text || !post.title,
+    [
+      post.title,
+      post.text
+    ]
+  )
 
   const addPost = (e) => {
-    e.preventDefault();
-    console.log(post);
+    addPostComplete({...post, id: Date.now()});
+    clearEditor();
   }
+
+  const clearEditor = () => setPost({...post, title: '', text: ''});
 
   return (
     <form>
-      <input
+      <Input
         value={post.title}
         placeholder="Title"
         type="text"
         onChange={(e) => setPost({...post, title: e.target.value})}
       />
-      <input
+      <Input
         value={post.text}
         placeholder="Text"
         type="text"
         onChange={(e) => setPost({...post, text: e.target.value})}
       />
-      <PostButton onClick={addPost}>Add Post</PostButton>
+      <Button disabled={disabled} onClick={addPost}>Add Post</Button>
     </form>
   );
 };

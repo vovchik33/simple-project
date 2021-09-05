@@ -2,14 +2,16 @@ import React from "react";
 import PostItem from "../post-item/PostItem";
 import PostHeader from "../post-header/PostHeader";
 
-function PostList({title, posts}) {
+import styles from "./PostList.module.css";
+
+function PostList({title, posts, remove}) {
   return (
-    <div className="post-list">
+    <div className={styles.posts__list}>
       <PostHeader title={title} />
       {
         posts.map((post, index) => {
           return (
-            <PostItem key={index} index={index+1} {...post}/>
+            <PostItem remove={remove} key={post.id} index={index+1} {...post}/>
           )
         })
       }
